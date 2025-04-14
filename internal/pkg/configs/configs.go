@@ -14,7 +14,7 @@ import (
 const (
 	configFileKey     = "configFile"
 	defaultConfigFile = ""
-	configFileUsage   = "this is config file path"
+	configFileUsage   = ""
 )
 
 var (
@@ -61,6 +61,8 @@ type AppConfig struct {
 	ClientConfig ClientConfig   `mapstructure:"client"`
 }
 
+// provides app configurations. It uses sync.Once to ensure that config is loaded only once
+// flag pkg  to parse command line args, allowing users to specify custom configuration file
 func ProvideAppConfig() (c *AppConfig, err error) {
 	once.Do(func() {
 		var configFile string
@@ -73,6 +75,7 @@ func ProvideAppConfig() (c *AppConfig, err error) {
 		if err != nil {
 			return
 		}
+		//load the config from specified file
 		c, err = LoadConfig(configReader)
 		if err != nil {
 			return
@@ -83,6 +86,8 @@ func ProvideAppConfig() (c *AppConfig, err error) {
 	return cachedConfig, err
 }
 
+// reads the configuration from a reader object (which can be a file or any other source)
+// uses viper pkg to handle config loading and parsing
 func LoadConfig(reader io.Reader) (*AppConfig, error) {
 	var appconfig AppConfig
 	viper.AutomaticEnv()
@@ -110,6 +115,7 @@ func LoadConfig(reader io.Reader) (*AppConfig, error) {
 	return &appconfig, nil
 }
 
+// binds env variables to configuration keys, allowing config values to be set via env variables
 func bind(keysToEnvironmentVariables map[string]string) error {
 	var bindErrors error
 

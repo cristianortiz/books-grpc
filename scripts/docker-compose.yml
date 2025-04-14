@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:15
+    container_name: books_db
+    environment:
+      POSTGRES_USER: books
+      POSTGRES_PASSWORD: books
+      POSTGRES_DB: books_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - books_network
+
+  api:
+    build:
+      context: ..
+      dockerfile: scripts/Dockerfile
+    container_name: books_api
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    environment:
+      CONFIG_FILE: /app/configs/config.yaml
+    networks:
+      - books_network
+
+volumes:
+  db_data:
+
+networks:
+  books_network:

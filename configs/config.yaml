@@ -1,0 +1,24 @@
+app:
+  serviceName: "books-api"
+  host: "localhost"
+  port: 9000
+  logLevel: "info"
+
+db:
+  name: "books_db"
+  schema: "public"
+  user: "books"
+  password: "books"
+  #docker execution host, think in containers share network, the service in dockercompose also has to be named "db"
+  #if the api will be executed locally the host must be "localhost"
+  host: "db"
+  port: 5432
+  logMode: true
+  sslMode: "disable"
+  connectionPool:
+    maxOpenConnections: 10
+    maxIdleConnections: 5
+    maxIdleTime: 300
+    maxLifeTime: 600
+    timeout: 30
+  migrationPath: "./scripts/migrations"
