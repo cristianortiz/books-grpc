@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package proto;
+//specifies Go package name and import path for generated go code, will be placed in packae named "proto"
+// in current directoru
+option go_package="./proto";
+//empty message with no fields, used when an RPC mehod does not require any param o
+message Empty{}
+
+//message definitions, used to define data structure that can be sent or received in gRPC requests and responses
+message Book {
+    int32 isbn = 1;
+    string name = 2;
+    string publisher = 3;
+}
+
+message AddBookResponse{
+    string status = 1;
+}
+
+message ListBooksResponse{
+    repeated Book books = 1;
+}
+
+message GetBookRequest{
+    int32 isbn =1 ;
+}
+
+message RemoveBookRequest{
+    int32 isbn = 1;
+}
+
+message RemoveBookResponse{
+    string status = 1;
+}
+
+message UpdateBookResponse{
+    string status = 1;
+}
+
+service BookService{
+    //unary
+    rpc AddBook(Book) returns (AddBookResponse) {};
+    rpc ListBooks(Empty) returns (ListBooksResponse) {};
+    rpc GetBook(GetBookRequest) returns (Book) {};
+    rpc RemoveBook(RemoveBookRequest) returns (RemoveBookResponse) {};
+    rpc UpdateBook(Book) returns (UpdateBookResponse) {};
+}
