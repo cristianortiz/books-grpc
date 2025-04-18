@@ -8,43 +8,45 @@ This project is a backend implementation in Go (Golang) that uses **gRPC** for c
 
 Below is the folder and file structure of the project:
 
+```ultree
 books-grpc/
-├── cmd/
-│ └── rest-books-server/
-│ └── main.go # Entry point for the REST API server
-├── configs/
-│ └── config.yaml # Configuration file for the application
-├── internal/
-│ ├── grpc-books-server/ # gRPC server implementation
-│ │ └── grpc-books-server.go
-│ ├── rest-books-server/ # REST API server implementation
-│ │ ├── handlers.go # HTTP handlers for REST endpoints
-│ │ ├── mapper.go # Utility for mapping between models
-│ │ ├── rest-books-server.go # Main logic for the REST server
-│ │ └── router.go # Router setup for REST endpoints
-│ ├── pkg/
-│ │ ├── configs/ # Configuration loading and management
-│ │ │ └── configs.go
-│ │ ├── db/ # Database connection and migrations
-│ │ │ ├── db.go # Database connection setup
-│ │ │ └── migrations/
-│ │ │ └── migrator.go # Database migration logic
-│ │ ├── model/ # Data models for business logic and database
-│ │ │ ├── book.go # Business logic model for books
-│ │ │ └── book-db.go # Database-specific model for books
-│ │ ├── proto/ # gRPC protocol buffer definitions
-│ │ │ ├── book.proto # Protocol buffer definition
-│ │ │ ├── book.pb.go # Generated Go code from book.proto
-│ │ │ └── book_grpc.pb.go # Generated gRPC server and client code
-│ │ ├── repository/ # Data access layer
-│ │ │ └── book-repo.go # Repository for book-related database operations
-│ │ └── service/ # Business logic layer
-│ │ └── book-service.go # Service for managing books
-├── scripts/
-│ ├── Dockerfile # Dockerfile for building the API
-│ └── docker-compose.yml # Docker Compose file for API and database
-├── go.mod # Go module dependencies
-└── README.md # Project documentation
+├-- cmd/
+│ └---> rest-books-server/
+│ └---> main.go # Entry point for the REST API server
+├---> configs/
+│ └---> config.yaml # Configuration file for the application
+├---> internal/
+│ ├---> grpc-books-server/ # gRPC server implementation
+│ │ └---> grpc-books-server.go
+│ ├---> rest-books-server/ # REST API server implementation
+│ │ ├---> handlers.go # HTTP handlers for REST endpoints
+│ │ ├---> mapper.go # Utility for mapping between models
+│ │ ├---> rest-books-server.go # Main logic for the REST server
+│ │ └---> router.go # Router setup for REST endpoints
+│ ├---> pkg/
+│ │ ├---> configs/ # Configuration loading and management
+│ │ │ └---> configs.go
+│ │ ├---> db/ # Database connection and migrations
+│ │ │ ├---> db.go # Database connection setup
+│ │ │ └---> migrations/
+│ │ │ └---> migrator.go # Database migration logic
+│ │ ├---> model/ # Data models for business logic and database
+│ │ │ ├---> book.go # Business logic model for books
+│ │ │ └---> book-db.go # Database-specific model for books
+│ │ ├---> proto/ # gRPC protocol buffer definitions
+│ │ │ ├---> book.proto # Protocol buffer definition
+│ │ │ ├---> book.pb.go # Generated Go code from book.proto
+│ │ │ └---> book_grpc.pb.go # Generated gRPC server and client code
+│ │ ├---> repository/ # Data access layer
+│ │ │ └---> book-repo.go # Repository for book-related database operations
+│ │ └---> service/ # Business logic layer
+│ │ └---> book-service.go # Service for managing books
+├---> scripts/
+│ ├---> Dockerfile # Dockerfile for building the API
+│ └---> docker-compose.yml # Docker Compose file for API and database
+├---> go.mod # Go module dependencies
+└---> README.md # Project documentation
+```
 
 ---
 
