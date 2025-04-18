@@ -1,5 +1,5 @@
 app:
-  serviceName: "books-api"
+  serviceName: "rest-books-server"
   host: "localhost"
   port: 9000
   logLevel: "info"

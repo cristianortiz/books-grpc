@@ -1,4 +1,18 @@
 services:
+  rest-book-server:
+    build:
+      context: .
+      dockerfile: deployments/rest-books-server/Dockerfile
+    container_name: rest-books-server
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    environment:
+      CONFIG_FILE: /app/configs/rest-books-server.yaml
+    networks:
+      - books_network
+
   db:
     image: postgres:15
     container_name: books_db
@@ -10,20 +24,6 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-    networks:
-      - books_network
-
-  api:
-    build:
-      context: ..
-      dockerfile: scripts/Dockerfile
-    container_name: books_api
-    ports:
-      - "9000:9000"
-    depends_on:
-      - db
-    environment:
-      CONFIG_FILE: /app/configs/config.yaml
     networks:
       - books_network
 
