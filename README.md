@@ -45,8 +45,6 @@ Below is the folder and file structure of the project:
 │   └── docker-compose.yml         # Docker Compose file for API and database
 ```
 
-````
-
 ---
 
 ## **Key Components**
@@ -116,8 +114,11 @@ Below is the folder and file structure of the project:
 1. Build and start the services:
    ```bash
    docker-compose up --build
+   ```
+
 ````
 
 ```
 
 ```
+````
