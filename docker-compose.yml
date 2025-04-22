@@ -13,6 +13,20 @@ services:
     networks:
       - books_network
 
+  grpc-book-server:
+    build:
+      context: .
+      dockerfile: deployments/grpc-books-server/Dockerfile
+    container_name: grpc-books-server
+    ports:
+      - "50052:50052"
+    depends_on:
+      - db
+    environment:
+      CONFIG_FILE: /app/configs/grpc-books-server.yaml
+    networks:
+      - books_network
+
   db:
     image: postgres:15
     container_name: books_db

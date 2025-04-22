@@ -10,7 +10,7 @@ type Tabler interface {
 type DBBook struct {
 	Isbn      int    `json:"isbn"`
 	Name      string `json:"name"`
-	Publisher int    `json:"publisher"`
+	Publisher string `json:"publisher"`
 }
 
 // return the DB table name associated with this specific Book model

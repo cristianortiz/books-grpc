@@ -15,8 +15,13 @@ func NewBookRepository(db *gorm.DB) *BookRepository {
 	return &BookRepository{db: db}
 }
 
-func (br *BookRepository) AddBook(book *model.DBBook) {
-	br.db.Create(book)
+func (br *BookRepository) AddBook(book *model.DBBook) error {
+	result := br.db.Create(book)
+	if result.Error != nil {
+		// Devolver el error si la operación falla
+		return result.Error
+	}
+	return nil
 }
 func (br *BookRepository) UpdateBook(book *model.DBBook) {
 	br.db.Model(&book).Where("isbn=?", book.Isbn).Update("name", "publisher")
