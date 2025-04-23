@@ -19,11 +19,11 @@ func (bs *BookService) AddBook(book *model.DBBook) {
 }
 
 func (bs *BookService) GetBook(isbn int) (*model.DBBook, error) {
-	book := bs.booksRepo.GetBook(isbn)
-	if book != nil {
-		return book, nil
+	book, error := bs.booksRepo.GetBook(isbn)
+	if error != nil {
+		return nil, fmt.Errorf("book with isbn %d was not found", isbn)
 	}
-	return nil, fmt.Errorf("book with isbn %d was not found", isbn)
+	return book, nil
 }
 
 func (bs *BookService) GetAllBooks() ([]*model.DBBook, error) {

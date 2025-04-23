@@ -17,7 +17,7 @@ stop:
 restart:
 	@echo "Restarting all services..."
 	$(DOCKER_COMPOSE) down
-	$(DOCKER_COMPOSE) up --build
+	$(DOCKER_COMPOSE) up --build -d
 
 .PHONY: logs
 logs:

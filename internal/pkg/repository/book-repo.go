@@ -18,19 +18,26 @@ func NewBookRepository(db *gorm.DB) *BookRepository {
 func (br *BookRepository) AddBook(book *model.DBBook) error {
 	result := br.db.Create(book)
 	if result.Error != nil {
-		// Devolver el error si la operación falla
 		return result.Error
 	}
 	return nil
 }
-func (br *BookRepository) UpdateBook(book *model.DBBook) {
-	br.db.Model(&book).Where("isbn=?", book.Isbn).Update("name", "publisher")
+func (br *BookRepository) UpdateBook(book *model.DBBook) error {
+
+	result := br.db.Model(&book).Where("isbn=?", book.Isbn).Update("name", "publisher")
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
 }
 
-func (br *BookRepository) GetBook(isbn int) *model.DBBook {
+func (br *BookRepository) GetBook(isbn int) (*model.DBBook, error) {
 	var book model.DBBook
-	br.db.First(&book, isbn)
-	return &book
+	result := br.db.First(&book, isbn)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &book, nil
 }
 func (br *BookRepository) GetAllBooks() ([]*model.DBBook, error) {
 	books := make([]*model.DBBook, 0)
