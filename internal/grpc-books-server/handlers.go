@@ -42,15 +42,17 @@ func (a *App) UpdateBook(_ context.Context, req *proto.Book) (*proto.UpdateBookR
 
 }
 
-func (a *App) LisBooks(ctx context.Context, _ *proto.Empty) (*proto.ListBooksResponse, error) {
+func (a *App) ListBooks(ctx context.Context, _ *proto.Empty) (*proto.ListBooksResponse, error) {
 	log.Println("listing books")
+
 	books, err := a.bookRepo.GetAllBooks()
 	if err != nil {
 		return nil, err
 	}
+
 	b, err := json.Marshal(books)
 	if err != nil {
-		return nil, fmt.Errorf("error while marshalling books: %s", err.Error())
+		return nil, fmt.Errorf("error while marshalling books %s", err.Error())
 	}
 
 	pbBooks := []*proto.Book{}

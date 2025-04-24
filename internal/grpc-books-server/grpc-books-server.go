@@ -17,7 +17,9 @@ import (
 
 // used to encapsulate the grpc server functionality
 type App struct {
-	//Automatically generated interface by the protoc compiler, used to ensure type safety and avoid compilation errors in the application
+	//Automatically generated interface by the protoc compiler, used to ensure type safety and avoid compilation errors
+	//when some of the methods defined in the proto file has not been implemented yet, if any of this unimplemented methods
+	// // are called, "unimplemented error" will be returned automatically
 	proto.UnimplementedBookServiceServer
 	dbConn   *gorm.DB
 	bookRepo *repository.BookRepository
